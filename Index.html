@@ -6,6 +6,37 @@
     <title>Nomina</title>
 </head>
 <body>
-    
+    <form action="">
+        <h1 align="center">Nomina Mensual</h1>
+        <div style="border-style: solid;">
+        <h2>Valores de referencia</h2> 
+        <label for="Salario_minimo">Salario minimo</label>
+        <input type="text" id="Salario_minimo" name="Salario_minimo">
+        <label for="Auxilio_Transporte">Auxilio de transporte</label>
+        <input type="text" id="Auxilio_Transporte" name="Auxilio_Transporte">
+        <label for="Exoneracion">¿Está exonerado del pago de aportes?</label>
+        <select name="Exoneracion" id="Exoneracion">
+            <option value=1>Si</option>
+            <option value=2>No</option>
+            
+       </select>
+    </div><br>
+    <div   style="border-style: double;">
+        <label for="Nombre_Empleado">Nombre del empleado</label>
+        <input type="text" id="Nombre_Empleado" name="Nombre_Empleado">
+        <label for="Salario_Empleado">Salario Basico</label>
+        <input type="text" id="Salario_Empleado" name="Salario_Empleado">
+        <label for="Dias_liquidados">Dias liquidados</label>
+        <input type="number" id= "Dias_liquidados" name="Dias_liquidados" max="30" min = "1"><br>
+        <label for="Horas_diurnas">Horas extras diurnas</label>
+        <input type="number" id= "Horas_diurnas" name="Horas_diurnas" max="48" min = "0"><br>
+        <label for="Horas_nocturnas">Horas extras nocturnas</label>
+        <input type="number" id= "Horas_nocturnas" name="Horas_nocturnas" max="48" min = "0"><br>
+        <label for="Horas_dominicales">Horas extras dominicales</label>
+        <input type="number" id= "Horas_dominicales" name="Horas_dominicales" max="48" min = "0"><br>
+        <input type="submit" value="Submit">
+
+    </div> 
+    </form>
 </body>
 </html>
