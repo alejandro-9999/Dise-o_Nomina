@@ -13,7 +13,13 @@
     <header style="height: 70px">
      </header> 
     <?php
-        session_start();
+
+require_once 'dompdf/autoload.inc.php';
+
+use Dompdf\Adapter\CPDF;      
+                use Dompdf\Dompdf;
+                use Dompdf\Exception;
+session_start();
         ob_start();
         
         if(isset($_POST['Agregar']))
@@ -202,7 +208,7 @@
           
     <button type="submit" name="Reiniciar" class="btn btn-danger"> Reiniciar </button> 
         
-</form>
+
 </div>   
     </div>
             </div>       
@@ -223,7 +229,11 @@
     td{
         text-align: right;
     }
-</style>        
+</style>
+<?php
+
+$Salida_pdf = '
+        
 <table  valign="middle" border="1" cellspacing="0" cellpadding="0" style="font-size:13px" style="text-align:center;" align="center" >
             <thead>
                 <tr>
@@ -250,13 +260,19 @@
                     <th >Otras deducciones</td>
                     
                 </tr>
-            </thead>    
+            </thead>';
+            ECHO $Salida_pdf;
+            
+            
+ ?>               
             <?php
+            
                 if(!isset($_SESSION['Salario_minimo']))
                 {
                                      
                 }
                 else{
+                    $tablas = "";
                     foreach($_SESSION['empleados'] as $id => $value)
                     {
                         ECHO '<tr>
@@ -276,11 +292,46 @@
                         <td>'.$value['Retencion'].'</td>
                         <td>'.$value['Otras'].'</td>
                         <td>'.$value['Neto'].'</td>    
-                        <tr>';
+                        </tr>';
+                        $tablas=$tablas.'<tr>
+                        <td>'.$value['id'].'</td>
+                        <td>'.$value['Nombre'].'</td>
+                        <td>'.$value['Salario'].'</td>
+                        <td>'.$value['Dias'].'</td>
+                        <td>'.$value['Salario_Devengado'].'</td>
+                        <td>'.$value['Horas_extras'].'</td>
+                        <td>'.$value['Recargos_Nocturnos'].'</td>
+                        <td>'.$value['Dominical'].'</td>
+                        <td>'.$value['Auxilo_Transporte'].'</td>
+                        <td>'.$value['Total_Devengado'].'</td>
+                        <td>'.$value['Salud'].'</td>
+                        <td>'.$value['Pension'].'</td>
+                        <td>'.$value['Fondo'].'</td>
+                        <td>'.$value['Retencion'].'</td>
+                        <td>'.$value['Otras'].'</td>
+                        <td>'.$value['Neto'].'</td>    
+                        </tr>'; 
                     }
+                   $Salida_pdf = $Salida_pdf.$tablas.'</table> ';
+
+
                 }
+               
             ?>
-        </table>  
+        </table> 
+        <div style="height: 50px;"></div>
+                
+                <button type="submit" name="Imprimir" class="btn btn-success" > Imprimir </button> 
+                
+                </form>
+                
+                               
+             
+                <?php 
+                    $_SESSION['variable'] = $Salida_pdf;  
+                ?>
+                <a href="./generar_pdf.php?ht=<?php $Salida_pdf; ?>">contactarme </a>
+                
 </div>
 </div>
 </div>
